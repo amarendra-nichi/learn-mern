@@ -5,16 +5,8 @@ var logger = require("morgan");
 const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:27017/learn-mern");
 
-// const { Schema } = mongoose();
-
-const Institute = mongoose.model("Institute", { name: String });
-
-new Institute({ name: "GIMT" }).save().then((res) => console.log(res));
-// const kitty = new User({ name: "Zildjian" });
-// kitty.save().then(() => console.log("meow"));
-
 var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+// var usersRouter = require("./routes/users");
 
 var app = express();
 
@@ -25,6 +17,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
+// app.use("/users", usersRouter);
 
 module.exports = app;

@@ -1,9 +1,8 @@
 var express = require("express");
 var router = express.Router();
-
+var XYZController = require("../controllers/XYZController");
 /* GET home page. */
-router.get("/", function (req, res, next) {
-  res.json({ test: "working" });
-});
+router.get("/", XYZController.index);
+router.get("/create", XYZController.create);
 
 module.exports = router;
