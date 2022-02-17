@@ -1,5 +1,6 @@
 const User = require("../models/User");
 // db
+
 exports.index = async function (req, res) {
   var myins = await User.getUsers();
   return res.json({

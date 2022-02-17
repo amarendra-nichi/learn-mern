@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
-const { User } = require("./UserSeeder");
+const UserSeeder = require("./UserSeeder");
+const { User, Institute } = require("../Migrations/Index");
 
+console.log(["User", "Institute"].includes(String(process.argv.slice(2)[0])));
+process.exit(1);
 mongoose
   .connect("mongodb://localhost:27017/learn-mern", { useNewUrlParser: true })
   .catch((err) => {
@@ -12,18 +15,14 @@ mongoose
   });
 
 function* run() {
-  yield User.save().then(() => {
+  yield User.insertMany(UserSeeder).then((res, err) => {
+    console.log(res);
     mongoose.disconnect();
   });
 }
 
-let generatorFunc;
-async function doTheLoop() {
-  generatorFunc = run();
-  do {
-    await generatorFunc.next();
-  } while (generatorFunc.next() !== true);
-}
+const generatorFunc = run();
+generatorFunc.next();
 
 // new User(UserSeeder).save().then(function (res) {
 //   console.log(res);

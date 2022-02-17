@@ -11,7 +11,14 @@ const usersSchma = {
     required: true,
     lowercase: true,
   },
-  age: Number,
+  age: {
+    type: Number,
+    min: 1,
+    validate: {
+      validator: (v) => v % 2 === 0,
+      message: (props) => props.value + " is not event",
+    },
+  },
   bestfriend: SchemaTypes.ObjectId, //user itself
   hobbies: [String],
   address: {

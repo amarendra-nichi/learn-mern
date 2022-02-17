@@ -15,7 +15,12 @@ const UserSeeder = function () {
   };
 };
 
-module.exports = new User(UserSeeder());
+const arrayUserSeeder = [];
+for (let index = 0; index < 5; index++) {
+  arrayUserSeeder.push(UserSeeder());
+}
+
+module.exports = arrayUserSeeder;
 //connect mongoose
 
 //save your data. this is an async operation //after you make sure you seeded all the Users, disconnect automatically
