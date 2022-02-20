@@ -2,8 +2,6 @@ const mongoose = require("mongoose");
 const UserSeeder = require("./UserSeeder");
 const { User, Institute } = require("../Migrations/Index");
 
-console.log(["User", "Institute"].includes(String(process.argv.slice(2)[0])));
-process.exit(1);
 mongoose
   .connect("mongodb://localhost:27017/learn-mern", { useNewUrlParser: true })
   .catch((err) => {

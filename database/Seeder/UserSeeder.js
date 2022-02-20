@@ -5,6 +5,7 @@ const { User } = require("../Migrations/Index");
 const UserSeeder = function () {
   return {
     name: faker.name.findName(),
+    role: faker.random.arrayElement(["admin", "user", "viewer"]),
     email: faker.internet.email(),
     age: Math.floor(Math.random() * 100),
     hobbies: faker.random.arrayElements(["music", "bla", "bla"]),

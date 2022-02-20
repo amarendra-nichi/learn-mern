@@ -1,28 +1,31 @@
 const mongoose = require("mongoose");
 const { User } = require("../database/Migrations/Index");
-// const { Schema } = mongoose();
 
-// const Institute = mongoose.model("Institute", {
-//   name: String,
-//   location: String,
-// });
+exports.insert = async function (payload) {
+  return await User.insertMany(payload);
+};
 
-// new Institute({ name: "GIMT", location: "BLR" })
-//   .save()
-//   .then((res) => console.log(res));
-// const kitty = new User({ name: "Zildjian" });
-// kitty.save().then(() => console.log("meow"));
-
-exports.getUsers = async function () {
-  // console.log("hit", Institute.find({ name: "GIMT" }));
-  const users = await User.find({});
+exports.getUsersById = async function (payload) {
+  const users = await User.findById(payload);
+  console.log(users, "Data");
   return users;
 };
 
-exports.insert = function (payload) {
-  return new User(payload).save();
+exports.update = async function (id, payload) {
+  const users = await User.findByIdAndUpdate(id, payload);
+  return users;
+};
+exports.delete = async function (id) {
+  const users = await User.findByIdAndDelete(id);
+  return users;
 };
 
-// exports.getUsersOnAge() = ()=> {
-//     console.log(User)
-// }
+exports.getUserByName = async function (name) {
+  const usr = await User.findByName(name);
+  return usr;
+};
+
+exports.getUsers = async function () {
+  return await User.find({});
+};
+// exports.by_name = async (name) => await User.find().byName(name);
