@@ -6,8 +6,7 @@ const addressSchema = new Schema({
 });
 const instituteSchema = {
   name: String,
-  bestfriend: SchemaTypes.ObjectId, //user itself
-  hobbies: [String],
+  students: [{ type: SchemaTypes.ObjectId, ref: "User" }], //user itself
   address: addressSchema,
   createdAt: Date,
   updatedAt: Date,

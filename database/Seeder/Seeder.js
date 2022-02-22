@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const UserSeeder = require("./UserSeeder");
+const InstituteSeeder = require("./InstituteSeeder");
 const { User, Institute } = require("../Migrations/Index");
 
 mongoose
@@ -13,6 +14,9 @@ mongoose
   });
 
 function* run() {
+  // yield Institute.insertMany(InstituteSeeder).then((res, err) => {
+  //   console.log(res);
+  // });
   yield User.insertMany(UserSeeder).then((res, err) => {
     console.log(res);
     mongoose.disconnect();
@@ -21,6 +25,7 @@ function* run() {
 
 const generatorFunc = run();
 generatorFunc.next();
+// generatorFunc.next();
 
 // new User(UserSeeder).save().then(function (res) {
 //   console.log(res);

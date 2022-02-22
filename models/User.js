@@ -6,7 +6,7 @@ exports.insert = async function (payload) {
 };
 
 exports.getUsersById = async function (payload) {
-  const users = await User.findById(payload);
+  const users = await User.findById(payload).populate("institute");
   console.log(users, "Data");
   return users;
 };

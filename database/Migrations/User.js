@@ -6,10 +6,10 @@ const addressSchema = new Schema({
 });
 const usersSchma = {
   name: String,
-  role: String,
+  role: { type: String, enum: ["user", "viewer", "admin"] },
   email: {
     type: String,
-    required: true,
+    // required: true,
     lowercase: true,
   },
   age: {
@@ -21,6 +21,7 @@ const usersSchma = {
     // },
   },
   bestfriend: { type: SchemaTypes.ObjectId, ref: "User" }, //user itself
+  institute: { type: SchemaTypes.ObjectId, ref: "Institute" }, //user itself
   hobbies: [String],
   address: {
     street: String,

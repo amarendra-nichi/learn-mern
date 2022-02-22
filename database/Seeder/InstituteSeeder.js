@@ -1,32 +1,24 @@
 const { faker } = require("@faker-js/faker");
-const { User, Institute } = require("../Migrations/Index");
+const { User } = require("../Migrations/Index");
 
 // const dev = require("../config/dev"); //get your mongoose string //create your array. i inserted only 1 object here
-const UserSeeder = function () {
+const InstituteSeeder = function () {
   return {
-    name: faker.name.findName(),
-    role: faker.random.arrayElement(["admin", "user", "viewer"]),
-    email: faker.internet.email(),
-    age: Math.floor(Math.random() * 100),
-    hobbies: faker.random.arrayElements(["music", "bla", "bla"]),
+    name: faker.random.arrayElement(["AEC", "IIT", "JEC", "GIMT"]),
+    // students: [],
     address: {
       street: faker.address.cityName(),
       city: faker.address.cityName(),
     },
-    institute: faker.random.arrayElement([
-      "621368e9e03e81af934f5b8e",
-      "621368e9e03e81af934f5b90",
-      "621368e9e03e81af934f5b92",
-    ]),
   };
 };
 
-const arrayUserSeeder = [];
+const arrayInstituteSeeder = [];
 for (let index = 0; index < 5; index++) {
-  arrayUserSeeder.push(UserSeeder());
+  arrayInstituteSeeder.push(InstituteSeeder());
 }
 
-module.exports = arrayUserSeeder;
+module.exports = arrayInstituteSeeder;
 //connect mongoose
 
 //save your data. this is an async operation //after you make sure you seeded all the Users, disconnect automatically

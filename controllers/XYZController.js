@@ -1,5 +1,7 @@
 const User = require("../models/User");
 const helper = require("../helpers/helpers");
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" }).single("avatar");
 // db
 
 exports.index = async function (req, res) {
@@ -27,8 +29,15 @@ exports.getAll = async function (req, res) {
   }
 };
 exports.insert = async function (req, res) {
+  upload(req, res, function (err) {
+    if (err instanceof multer.MulterError) {
+      // A Multer error occurred when uploading.
+    } else if (err) {
+      // An unknown error occurred when uploading.
+    } // Everything went fine.
+  });
   let data = await User.insert(req.body);
-  return res.json({ msg: "Inserted", data: data });
+  return res.status(201).json({ msg: "Inserted", data: data });
 };
 
 exports.update = async function (req, res) {
@@ -42,7 +51,7 @@ exports.update = async function (req, res) {
       req.body.email == null ? helper.LowerCase(Data.email) : req.body.email,
   };
   let Update = await User.update(req.body.id, updateData);
-  return res.json({ msg: "update", data: updateData });
+  return res.status(201).json({ msg: "update", data: updateData });
 };
 exports.delete = async function (req, res) {
   let del = await User.delete(req.body.id);
@@ -58,6 +67,15 @@ exports.TogetUserByName = async function (req, res) {
     console.log(by_nameUser);
 
     return res.json({ msg: "find by name", data: by_nameUser });
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
+exports.singleUser = async function (req, res) {
+  try {
+    const user = await User.getUsersById(req.body.id);
+    return res.status(200).json({ msg: "find by name", data: user });
   } catch (e) {
     console.log(e.message);
   }
